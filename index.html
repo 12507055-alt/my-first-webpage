@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>우현지 · 자기소개</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fbfaf6;
+    --ink: #1b2430;
+    --ink-soft: #4a5568;
+    --mustard: #c9971f;
+    --sage: #6f8f76;
+    --line: #e2ddd0;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 24px 100px;
+  }
+
+  header {
+    margin-bottom: 64px;
+  }
+
+  .kicker {
+    font-size: 0.95rem;
+    color: var(--sage);
+    margin: 0 0 12px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 600;
+    margin: 0 0 20px;
+    line-height: 1.15;
+  }
+
+  .lede {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 60ch;
+  }
+
+  section {
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 20px;
+  }
+
+  p {
+    color: var(--ink-soft);
+    max-width: 62ch;
+  }
+
+  .interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .interests li {
+    padding: 8px 16px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .goals {
+    padding-left: 20px;
+    color: var(--ink-soft);
+  }
+
+  .goals li {
+    margin-bottom: 10px;
+  }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  footer a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--mustard);
+  }
+
+  footer a:hover {
+    color: var(--mustard);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <p class="kicker">안녕하세요, 저는</p>
+      <h1>우현지입니다</h1>
+      <p class="lede">
+        [나이는 29살. 서울사이버대학교 컴퓨터공학과에 다녀요.]
+      </p>
+    </header>
+
+    <section>
+      <h2>저는 mbti가 istj입니다</h2>
+      <p>
+        [저는 직장에 들어간지 3개월밖에 안다녔어요.]
+      </p>
+    </section>
+
+    <section>
+      <h2>관심사</h2>
+      <ul class="interests">
+        <li>애니메이션 1</li>
+        <li>영화 2</li>
+        <li>결혼 3</li>
+        <li>운동 4</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>목표</h2>
+      <ul class="goals">
+        <li>[성적 "A"받기 1]</li>
+        <li>[돈모으기 2]</li>
+        <li>[회사 오래다니기 3]</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>
+        연락처: <a href="mailto:example@email.com">example@email.com</a>
+        &nbsp;·&nbsp;
+        GitHub: <a href="https://github.com/username" target="_blank" rel="noopener">github.com/username</a>
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>
