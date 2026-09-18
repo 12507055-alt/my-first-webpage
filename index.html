@@ -1,170 +1,108 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>우현지 · 자기소개</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --paper: #fbfaf6;
-    --ink: #1b2430;
-    --ink-soft: #4a5568;
-    --mustard: #c9971f;
-    --sage: #6f8f76;
-    --line: #e2ddd0;
-  }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-  }
-
-  .wrap {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 80px 24px 100px;
-  }
-
-  header {
-    margin-bottom: 64px;
-  }
-
-  .kicker {
-    font-size: 0.95rem;
-    color: var(--sage);
-    margin: 0 0 12px;
-  }
-
-  h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2.4rem, 6vw, 3.6rem);
-    font-weight: 600;
-    margin: 0 0 20px;
-    line-height: 1.15;
-  }
-
-  .lede {
-    font-size: 1.1rem;
-    color: var(--ink-soft);
-    max-width: 60ch;
-  }
-
-  section {
-    margin-top: 56px;
-    padding-top: 40px;
-    border-top: 1px solid var(--line);
-  }
-
-  h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 20px;
-  }
-
-  p {
-    color: var(--ink-soft);
-    max-width: 62ch;
-  }
-
-  .interests {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
-
-  .interests li {
-    padding: 8px 16px;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    font-size: 0.95rem;
-    color: var(--ink);
-  }
-
-  .goals {
-    padding-left: 20px;
-    color: var(--ink-soft);
-  }
-
-  .goals li {
-    margin-bottom: 10px;
-  }
-
-  footer {
-    margin-top: 64px;
-    padding-top: 32px;
-    border-top: 1px solid var(--line);
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-  }
-
-  footer a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--mustard);
-  }
-
-  footer a:hover {
-    color: var(--mustard);
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriAI - 맞춤형 식단 관리 서비스</title>
 </head>
 <body>
-  <div class="wrap">
 
-    <header>
-      <p class="kicker">안녕하세요, 저는</p>
-      <h1>우현지입니다</h1>
-      <p class="lede">
-        [나이는 29살. 서울사이버대학교 컴퓨터공학과에 다녀요.]
-      </p>
-    </header>
+  <!-- 
+    ==================================================
+    1. 사용자 · 목적 · 핵심 행동 · 정보 순서 (HTML 주석)
+    - 사용자: 바쁜 일상 속에서 건강한 식습관을 유지하고 싶은 직장인 및 다이어터
+    - 목적: AI 분석을 통해 개개인의 목표에 맞춘 일일 맞춤형 식단을 추천하고 기록 관리 제공
+    - 핵심 행동: 주요 기능 확인 후 7일 무료 체험 및 맞춤 식단 리포트 신청하기
+    - 정보 순서: 헤더(내부 이동 네비게이션) -> 서비스 소개 & 이미지 -> 주요 기능 -> 이용 방법 -> 신청 폼 -> 푸터
+    ==================================================
+  -->
 
-    <section>
-      <h2>저는 mbti가 isfj입니다</h2>
-      <p>
-        [저는 직장에 들어간지 3개월밖에 안다녔어요.]
-      </p>
+  <!-- 8. 페이지 내부 이동 구조 (헤더 네비게이션) -->
+  <header>
+    <!-- 2. 서비스 이름과 한 줄 소개 -->
+    <h1>NutriAI (뉴트리아)</h1>
+    <p>AI가 분석하는 나만을 위한 맞춤형 식단 및 영양 케어 솔루션</p>
+    
+    <nav>
+      <ul>
+        <li><a href="#about">서비스 소개</a></li>
+        <li><a href="#features">주요 기능</a></li>
+        <li><a href="#steps">이용 방법</a></li>
+        <li><a href="#contact">무료 체험 신청</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 3. 서비스 소개 -->
+    <section id="about">
+      <h2>서비스 소개</h2>
+      <p>NutriAI는 사용자의 건강 데이터와 취향을 분석하여 최적의 영양 밸런스 식단을 제안합니다. 매일 무엇을 먹을지 고민하지 않고 건강한 라이프스타일을 완성할 수 있습니다.</p>
+      
+      <!-- 6. 이미지 1장과 대체 텍스트 (alt) -->
+      <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600" alt="신선한 샐러드와 건강 식단이 차려진 테이블 예시 이미지">
     </section>
 
-    <section>
-      <h2>관심사</h2>
-      <ul class="interests">
-        <li>1. 애니메이션</li>
-        <li>2. 다이어트</li>
-        <li>3. 결혼 </li>
-        <li>4. 운동</li>
+    <!-- 4. 주요 기능 3개 -->
+    <section id="features">
+      <h2>주요 기능</h2>
+      <ul>
+        <li>
+          <h3>1. AI 맞춤 식단 추천</h3>
+          <p>사용자의 목표 칼로리, 영양 비율, 알레르기 유무를 고려한 맞춤 메뉴를 매일 아침 추천합니다.</p>
+        </li>
+        <li>
+          <h3>2. 사진 한 장으로 영양소 분석</h3>
+          <p>음식 사진을 촬영해 올리면 AI가 자동으로 칼로리와 탄단지 영양 성분을 분석하여 기록합니다.</p>
+        </li>
+        <li>
+          <h3>3. 주간 영양 피드백 리포트</h3>
+          <p>한 주 동안의 영양 섭취 불균형 패턴을 진단하고 전문 영양사의 가이드라인을 리포트로 제공합니다.</p>
+        </li>
       </ul>
     </section>
 
-    <section>
-      <h2>목표</h2>
-      <ul class="goals">
-        <li>[1.학점 4점이상 받기]</li>
-        <li>[2. 돈 1000만원 모으기]</li>
-        <li>[3. 지금 다니는 회사 3년 다니기]</li>
-      </ul>
+    <!-- 5. 이용 방법 3단계 -->
+    <section id="steps">
+      <h2>이용 방법</h2>
+      <ol>
+        <li><strong>1단계:</strong> 간단한 신체 정보 및 건강 목표(체중 감량, 근육 증가 등) 입력하기</li>
+        <li><strong>2단계:</strong> AI가 제안하는 일일 식단표를 확인하고 식사 사진 업로드하기</li>
+        <li><strong>3단계:</strong> 실시간 칼로리 분석과 주간 영양 리포트로 건강한 변화 확인하기</li>
+      </ol>
     </section>
 
-    <footer>
-      <p>
-        연락처: <a href="12507055@iscu.ac.kr">12507055@iscu.ac.kr</a>
-        &nbsp;·&nbsp;
-        GitHub: <a href="https://12507055-alt.github.io/my-first-webpage/" target="_blank" rel="noopener">github.com/12507055-alt/my-first-webpage</a>
-      </p>
-    </footer>
+    <!-- 7. 최소 입력 영역 (폼) -->
+    <section id="contact">
+      <h2>7일 무료 맞춤 식단 리포트 신청하기</h2>
+      <form>
+        <div>
+          <label for="userName">이름:</label>
+          <input type="text" id="userName" name="userName" placeholder="이름을 입력하세요" required>
+        </div>
+        <br>
+        <div>
+          <label for="userEmail">이메일:</label>
+          <input type="email" id="userEmail" name="userEmail" placeholder="리포트를 받을 이메일을 입력하세요" required>
+        </div>
+        <br>
+        <div>
+          <label for="goal">건강 목표:</label>
+          <select id="goal" name="goal">
+            <option value="diet">체중 감량 (다이어트)</option>
+            <option value="muscle">근육량 증가 (벌크업)</option>
+            <option value="health">건강 유지 및 식습관 개선</option>
+          </select>
+        </div>
+        <br>
+        <button type="submit">무료 체험 신청하기</button>
+      </form>
+    </section>
+  </main>
 
-  </div>
+  <footer>
+    <p>&copy; 2026 NutriAI. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
