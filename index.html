@@ -5,261 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NutriAI - 맞춤형 식단 관리 서비스</title>
   <style>
-    /* --------------------------------------------------
-       기본 초기화 & 유동 너비 설정
-       -------------------------------------------------- */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-    line-height: 1.6;
-    color: #333333;
-    background-color: #f8f9fa;
-    padding-bottom: 60px;
-    overflow-x: hidden;
-    word-break: keep-all;
-}
+    /* 기존 CSS 유지 */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; line-height: 1.6; color: #333333; background-color: #f8f9fa; padding-bottom: 60px; overflow-x: hidden; word-break: keep-all; }
+    main { width: 90%; max-width: 960px; margin: 30px auto; }
+    img { max-width: 100%; height: auto; display: block; }
 
-    main {
-      width: 90%;
-      max-width: 960px;
-      margin: 30px auto;
-    }
+    header { background-color: #2e7d32; color: #ffffff; padding: 40px 20px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+    header h1 { font-size: 2.2rem; margin-bottom: 8px; }
+    header p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 20px; }
+    nav ul { list-style: none; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    nav a { color: #ffffff; text-decoration: none; font-weight: bold; padding: 10px 18px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; display: inline-block; white-space: nowrap; transition: background-color 0.3s; }
+    nav a:hover { background-color: rgba(255, 255, 255, 0.4); }
 
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+    section { background-color: #ffffff; margin-bottom: 30px; padding: 30px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
+    h2 { font-size: 1.6rem; color: #2e7d32; border-bottom: 2px solid #81c784; padding-bottom: 8px; margin-bottom: 20px; }
+    #about img { border-radius: 8px; margin-top: 15px; border: 1px solid #eeeeee; width: 100%; }
 
-    /* --------------------------------------------------
-       데스크톱 / 기본 레이아웃
-       -------------------------------------------------- */
-    header {
-      background-color: #2e7d32;
-      color: #ffffff;
-      padding: 40px 20px;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    header h1 {
-      font-size: 2.2rem;
-      margin-bottom: 8px;
-    }
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      margin-bottom: 20px;
-    }
-    
-    /* 데스크톱 메뉴 (가로 배치) */
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 10px 18px;
-      background-color: rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      display: inline-block;
-      white-space: nowrap;
-      transition: background-color 0.3s;
-    }
-    nav a:hover {
-      background-color: rgba(255, 255, 255, 0.4);
-    }
+    .features-grid { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .features-grid li { background-color: #f1f8e9; padding: 20px; border-top: 5px solid #4caf50; border-radius: 8px; }
+    .features-grid h3 { font-size: 1.15rem; color: #1b5e20; margin-bottom: 10px; }
+    #steps ol { padding-left: 20px; }
+    #steps li { margin-bottom: 12px; font-size: 1.05rem; }
 
-    section {
-      background-color: #ffffff;
-      margin-bottom: 30px;
-      padding: 30px;
-      border-radius: 12px;
-      border: 1px solid #e0e0e0;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-    h2 {
-      font-size: 1.6rem;
-      color: #2e7d32;
-      border-bottom: 2px solid #81c784;
-      padding-bottom: 8px;
-      margin-bottom: 20px;
-    }
+    /* 6주차 추가: 탭 UI 스타일 */
+    .tab-menu { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab-btn { flex: 1; padding: 12px; background-color: #f1f8e9; border: 1px solid #c5e1a5; border-radius: 8px; cursor: pointer; font-weight: bold; color: #2e7d32; transition: all 0.3s; }
+    .tab-btn:hover { background-color: #dcedc8; }
+    .tab-btn.active { background-color: #2e7d32; color: white; border-color: #2e7d32; }
+    .tab-content { display: none; padding: 20px; background-color: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 1.05rem; }
+    .tab-content.active { display: block; /* 활성화된 탭만 표시 */ }
 
-    #about img {
-      border-radius: 8px;
-      margin-top: 15px;
-      border: 1px solid #eeeeee;
-      width: 100%;
-    }
+    /* 폼 스타일 */
+    #contact form { display: flex; flex-direction: column; gap: 15px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    label { font-weight: bold; font-size: 0.95rem; }
+    input[type="text"], input[type="email"], select { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+    button[type="submit"] { background-color: #2e7d32; color: #ffffff; padding: 12px; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: background-color 0.2s; }
+    button[type="submit"]:hover:not(:disabled) { background-color: #1b5e20; }
+    footer { text-align: center; color: #777777; font-size: 0.9rem; margin-top: 40px; }
 
-    /* CSS Grid (데스크톱 3열) */
-    .features-grid {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .features-grid li {
-      background-color: #f1f8e9;
-      padding: 20px;
-      border-top: 5px solid #4caf50;
-      border-radius: 8px;
-    }
-    .features-grid h3 {
-      font-size: 1.15rem;
-      color: #1b5e20;
-      margin-bottom: 10px;
-    }
-
-    #steps ol {
-      padding-left: 20px;
-    }
-    #steps li {
-      margin-bottom: 12px;
-      font-size: 1.05rem;
-    }
-
-    #contact form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    label {
-      font-weight: bold;
-      font-size: 0.95rem;
-    }
-    input[type="text"],
-    input[type="email"],
-    select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-    button[type="submit"] {
-      background-color: #2e7d32;
-      color: #ffffff;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.2s;
-    }
-    button[type="submit"]:hover {
-      background-color: #1b5e20;
-    }
-
-    footer {
-      text-align: center;
-      color: #777777;
-      font-size: 0.9rem;
-      margin-top: 40px;
-    }
-
-    /* --------------------------------------------------
-       모바일 및 태블릿 반응형 (768px 이하 조건)
-       -------------------------------------------------- */
     @media screen and (max-width: 768px) {
-      header {
-        padding: 25px 15px;
-      }
-      header h1 {
-        font-size: 1.6rem;
-      }
-      header p {
-        font-size: 0.95rem;
-      }
-      main {
-        width: 92%;
-        margin: 15px auto;
-      }
-      section {
-        padding: 20px 15px;
-        margin-bottom: 20px;
-      }
-      h2 {
-        font-size: 1.3rem;
-      }
-
-      /* 핵심 해결 1: 모바일 세로 풀사이즈 배치 */
-      nav ul {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: stretch !important;
-        gap: 10px !important;
-        width: 100%;
-      }
-      nav li {
-        width: 100%;
-      }
-      nav a {
-        display: block !important;
-        text-align: center;
-        padding: 12px 16px;
-        border-radius: 8px;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      /* 핵심 해결 2: 주요 기능 1열 배치 */
-      .features-grid {
-        grid-template-columns: 1fr !important;
-        gap: 15px;
-      }
-
-      /* 핵심 해결 3: 입력창 및 버튼 세로 정렬 */
-      #contact form {
-        gap: 12px;
-      }
-      input[type="text"],
-      input[type="email"],
-      select,
-      button[type="submit"] {
-        font-size: 0.95rem;
-        padding: 12px;
-      }
+      header { padding: 25px 15px; }
+      header h1 { font-size: 1.6rem; }
+      header p { font-size: 0.95rem; }
+      main { width: 92%; margin: 15px auto; }
+      section { padding: 20px 15px; margin-bottom: 20px; }
+      h2 { font-size: 1.3rem; }
+      nav ul { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 10px !important; width: 100%; }
+      nav li { width: 100%; }
+      nav a { display: block !important; text-align: center; padding: 12px 16px; border-radius: 8px; width: 100%; box-sizing: border-box; }
+      .features-grid { grid-template-columns: 1fr !important; gap: 15px; }
+      
+      /* 모바일에서 탭 버튼 세로 배치 */
+      .tab-menu { flex-direction: column; }
+      
+      #contact form { gap: 12px; }
+      input[type="text"], input[type="email"], select, button[type="submit"] { font-size: 0.95rem; padding: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 
-    ==================================================
-    1. 사용자 · 목적 · 핵심 행동 · 정보 순서 (HTML 주석)
-    - 사용자: 바쁜 일상 속에서 건강한 식습관을 유지하고 싶은 직장인 및 다이어터
-    - 목적: AI 분석을 통해 개개인의 목표에 맞춘 일일 맞춤형 식단을 추천하고 기록 관리 제공
-    - 핵심 행동: 주요 기능 확인 후 7일 무료 체험 및 맞춤 식단 리포트 신청하기
-    - 정보 순서: 헤더(내부 이동 네비게이션) -> 서비스 소개 & 이미지 -> 주요 기능 -> 이용 방법 -> 신청 폼 -> 푸터
-    ==================================================
-  -->
-
   <header>
     <h1>NutriAI (뉴트리아)</h1>
     <p>AI가 분석하는 나만을 위한 맞춤형 식단 및 영양 케어 솔루션</p>
-    
     <nav>
       <ul>
         <li><a href="#about">서비스 소개</a></li>
+        <li><a href="#tabs">추천 식단(탭)</a></li>
         <li><a href="#features">주요 기능</a></li>
-        <li><a href="#steps">이용 방법</a></li>
         <li><a href="#contact">무료 체험 신청</a></li>
       </ul>
     </nav>
@@ -272,39 +87,47 @@
       <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600" alt="신선한 샐러드와 건강 식단이 차려진 테이블 예시 이미지">
     </section>
 
+    <!-- 6주차 추가: 탭 UI 섹션 -->
+    <section id="tabs">
+      <h2>맞춤형 추천 식단 미리보기</h2>
+      <div class="tab-menu">
+        <button class="tab-btn active" data-target="tab1">🥗 다이어트 식단</button>
+        <button class="tab-btn" data-target="tab2">🥩 벌크업 식단</button>
+        <button class="tab-btn" data-target="tab3">🥑 건강 유지 식단</button>
+      </div>
+      
+      <!-- 탭 콘텐츠 3개 -->
+      <div id="tab1" class="tab-content active">
+        <strong>[칼로리 컷팅 샐러드 팩]</strong><br>
+        하루 1,200kcal 미만으로 구성된 포만감 높은 식단입니다. 곤약, 닭가슴살, 신선한 야채가 주를 이룹니다.
+      </div>
+      <div id="tab2" class="tab-content">
+        <strong>[고단백 육류/해산물 팩]</strong><br>
+        체중 1kg당 1.5g 이상의 단백질을 제공하는 식단입니다. 소고기, 연어, 달걀 등 필수 아미노산이 풍부합니다.
+      </div>
+      <div id="tab3" class="tab-content">
+        <strong>[지중해식 밸런스 팩]</strong><br>
+        통곡물과 올리브오일을 활용한 완벽한 영양 균형 식단입니다. 일상의 피로를 회복하고 활력을 더해줍니다.
+      </div>
+    </section>
+
     <section id="features">
       <h2>주요 기능</h2>
       <ul class="features-grid">
-        <li>
-          <h3>1. AI 맞춤 식단 추천</h3>
-          <p>사용자의 목표 칼로리, 영양 비율, 알레르기 유무를 고려한 맞춤 메뉴를 매일 아침 추천합니다.</p>
-        </li>
-        <li>
-          <h3>2. 사진 한 장으로 영양소 분석</h3>
-          <p>음식 사진을 촬영해 올리면 AI가 자동으로 칼로리와 탄단지 영양 성분을 분석하여 기록합니다.</p>
-        </li>
-        <li>
-          <h3>3. 주간 영양 피드백 리포트</h3>
-          <p>한 주 동안의 영양 섭취 불균형 패턴을 진단하고 전문 영양사의 가이드라인을 리포트로 제공합니다.</p>
-        </li>
+        <li><h3>1. AI 맞춤 추천</h3><p>알레르기 유무를 고려한 맞춤 메뉴 추천</p></li>
+        <li><h3>2. 사진 영양 분석</h3><p>사진 촬영으로 칼로리와 영양 성분 자동 기록</p></li>
+        <li><h3>3. 주간 리포트</h3><p>전문 영양사의 가이드라인 리포트 제공</p></li>
       </ul>
     </section>
 
-    <section id="steps">
-      <h2>이용 방법</h2>
-      <ol>
-        <li><strong>1단계:</strong> 간단한 신체 정보 및 건강 목표(체중 감량, 근육 증가 등) 입력하기</li>
-        <li><strong>2단계:</strong> AI가 제안하는 일일 식단표를 확인하고 식사 사진 업로드하기</li>
-        <li><strong>3단계:</strong> 실시간 칼로리 분석과 주간 영양 리포트로 건강한 변화 확인하기</li>
-      </ol>
-    </section>
-
     <section id="contact">
-      <h2>7일 무료 맞춤 식단 리포트 신청하기</h2>
+      <h2>7일 무료 체험 신청하기</h2>
       <form id="applyForm">
         <div class="form-group">
           <label for="userName">이름</label>
           <input type="text" id="userName" name="userName" placeholder="이름을 입력하세요" required>
+          <!-- input 이벤트 반응 영역 -->
+          <p id="nameGreeting" style="font-size: 0.85rem; font-weight: bold; margin-top: 5px; min-height: 1.2em;"></p>
         </div>
         
         <div class="form-group">
@@ -314,16 +137,18 @@
         
         <div class="form-group">
           <label for="goal">건강 목표</label>
-          <select id="goal" name="goal">
+          <select id="goal" name="goal" required>
+            <option value="">목표를 선택해주세요</option>
             <option value="diet">체중 감량 (다이어트)</option>
             <option value="muscle">근육량 증가 (벌크업)</option>
             <option value="health">건강 유지 및 식습관 개선</option>
           </select>
+          <!-- change 이벤트 반응 영역 -->
+          <p id="goalMessage" style="font-size: 0.9rem; margin-top: 8px; display: none; padding: 8px; border-radius: 4px;"></p>
         </div>
 
         <button type="submit" id="submitBtn">무료 체험 신청하기</button>
-
-        <p id="feedbackMessage" style="margin-top: 10px; font-size: 0.95rem;"></p>
+        <p id="feedbackMessage" style="margin-top: 10px; font-size: 0.95rem; text-align: center;"></p>
       </form>
     </section>
   </main>
@@ -332,7 +157,6 @@
     <p>&copy; 2026 NutriAI. All rights reserved.</p>
   </footer>
 
-  
   <script src="script.js"></script>
 </body>
 </html>
