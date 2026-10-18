@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NutriAI - 맞춤형 식단 관리 서비스</title>
   <style>
-    /* 기존 CSS 유지 */
+    /* 기본 초기화 및 레이아웃 */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; line-height: 1.6; color: #333333; background-color: #f8f9fa; padding-bottom: 60px; overflow-x: hidden; word-break: keep-all; }
     main { width: 90%; max-width: 960px; margin: 30px auto; }
     img { max-width: 100%; height: auto; display: block; }
 
+    /* 헤더 및 네비게이션 */
     header { background-color: #2e7d32; color: #ffffff; padding: 40px 20px; text-align: center; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
     header h1 { font-size: 2.2rem; margin-bottom: 8px; }
     header p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 20px; }
@@ -18,50 +19,56 @@
     nav a { color: #ffffff; text-decoration: none; font-weight: bold; padding: 10px 18px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; display: inline-block; white-space: nowrap; transition: background-color 0.3s; }
     nav a:hover { background-color: rgba(255, 255, 255, 0.4); }
 
+    /* 섹션 공통 스타일 */
     section { background-color: #ffffff; margin-bottom: 30px; padding: 30px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
     h2 { font-size: 1.6rem; color: #2e7d32; border-bottom: 2px solid #81c784; padding-bottom: 8px; margin-bottom: 20px; }
     #about img { border-radius: 8px; margin-top: 15px; border: 1px solid #eeeeee; width: 100%; }
 
+    /* 카드, 탭 레이아웃 */
     .features-grid { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .features-grid li { background-color: #f1f8e9; padding: 20px; border-top: 5px solid #4caf50; border-radius: 8px; }
     .features-grid h3 { font-size: 1.15rem; color: #1b5e20; margin-bottom: 10px; }
     #steps ol { padding-left: 20px; }
     #steps li { margin-bottom: 12px; font-size: 1.05rem; }
-
-    /* 6주차 추가: 탭 UI 스타일 */
     .tab-menu { display: flex; gap: 10px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 12px; background-color: #f1f8e9; border: 1px solid #c5e1a5; border-radius: 8px; cursor: pointer; font-weight: bold; color: #2e7d32; transition: all 0.3s; }
     .tab-btn:hover { background-color: #dcedc8; }
     .tab-btn.active { background-color: #2e7d32; color: white; border-color: #2e7d32; }
     .tab-content { display: none; padding: 20px; background-color: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 1.05rem; }
-    .tab-content.active { display: block; /* 활성화된 탭만 표시 */ }
+    .tab-content.active { display: block; }
 
-    /* 폼 스타일 */
+    /* 7주차 추가: 단계별 화면 전환 및 확인창 폼 스타일 */
+    .step-container { display: none; }
+    .step-container.active { display: block; animation: fadeIn 0.4s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
     #contact form { display: flex; flex-direction: column; gap: 15px; }
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     label { font-weight: bold; font-size: 0.95rem; }
+    .required { color: #d32f2f; margin-left: 4px; }
     input[type="text"], input[type="email"], select { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
-    button[type="submit"] { background-color: #2e7d32; color: #ffffff; padding: 12px; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px; transition: background-color 0.2s; }
-    button[type="submit"]:hover:not(:disabled) { background-color: #1b5e20; }
+    
+    button { color: #ffffff; padding: 14px; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; width: 100%; }
+    .btn-primary { background-color: #2e7d32; }
+    .btn-primary:hover { background-color: #1b5e20; }
+    .btn-secondary { background-color: #757575; }
+    .btn-secondary:hover { background-color: #424242; }
+    
+    .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+    .confirm-list { list-style: none; background-color: #f1f8e9; padding: 25px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #c5e1a5; }
+    .confirm-list li { margin-bottom: 12px; font-size: 1.1rem; }
+
     footer { text-align: center; color: #777777; font-size: 0.9rem; margin-top: 40px; }
 
+    /* 반응형 모바일 스타일 */
     @media screen and (max-width: 768px) {
       header { padding: 25px 15px; }
       header h1 { font-size: 1.6rem; }
-      header p { font-size: 0.95rem; }
-      main { width: 92%; margin: 15px auto; }
-      section { padding: 20px 15px; margin-bottom: 20px; }
-      h2 { font-size: 1.3rem; }
-      nav ul { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 10px !important; width: 100%; }
-      nav li { width: 100%; }
-      nav a { display: block !important; text-align: center; padding: 12px 16px; border-radius: 8px; width: 100%; box-sizing: border-box; }
-      .features-grid { grid-template-columns: 1fr !important; gap: 15px; }
-      
-      /* 모바일에서 탭 버튼 세로 배치 */
+      nav ul { display: flex !important; flex-direction: column !important; gap: 10px !important; width: 100%; }
+      nav a { display: block !important; text-align: center; width: 100%; }
+      .features-grid { grid-template-columns: 1fr !important; }
       .tab-menu { flex-direction: column; }
-      
-      #contact form { gap: 12px; }
-      input[type="text"], input[type="email"], select, button[type="submit"] { font-size: 0.95rem; padding: 12px; }
+      .btn-group { flex-direction: column; } /* 모바일에서는 버튼 세로 배치 */
     }
   </style>
 </head>
@@ -73,8 +80,7 @@
     <nav>
       <ul>
         <li><a href="#about">서비스 소개</a></li>
-        <li><a href="#tabs">추천 식단(탭)</a></li>
-        <li><a href="#features">주요 기능</a></li>
+        <li><a href="#tabs">추천 식단</a></li>
         <li><a href="#contact">무료 체험 신청</a></li>
       </ul>
     </nav>
@@ -83,11 +89,10 @@
   <main>
     <section id="about">
       <h2>서비스 소개</h2>
-      <p>NutriAI는 사용자의 건강 데이터와 취향을 분석하여 최적의 영양 밸런스 식단을 제안합니다. 매일 무엇을 먹을지 고민하지 않고 건강한 라이프스타일을 완성할 수 있습니다.</p>
-      <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600" alt="신선한 샐러드와 건강 식단이 차려진 테이블 예시 이미지">
+      <p>NutriAI는 사용자의 건강 데이터와 취향을 분석하여 최적의 영양 밸런스 식단을 제안합니다.</p>
+      <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600" alt="건강 식단 예시 이미지">
     </section>
 
-    <!-- 6주차 추가: 탭 UI 섹션 -->
     <section id="tabs">
       <h2>맞춤형 추천 식단 미리보기</h2>
       <div class="tab-menu">
@@ -95,61 +100,70 @@
         <button class="tab-btn" data-target="tab2">🥩 벌크업 식단</button>
         <button class="tab-btn" data-target="tab3">🥑 건강 유지 식단</button>
       </div>
-      
-      <!-- 탭 콘텐츠 3개 -->
-      <div id="tab1" class="tab-content active">
-        <strong>[칼로리 컷팅 샐러드 팩]</strong><br>
-        하루 1,200kcal 미만으로 구성된 포만감 높은 식단입니다. 곤약, 닭가슴살, 신선한 야채가 주를 이룹니다.
-      </div>
-      <div id="tab2" class="tab-content">
-        <strong>[고단백 육류/해산물 팩]</strong><br>
-        체중 1kg당 1.5g 이상의 단백질을 제공하는 식단입니다. 소고기, 연어, 달걀 등 필수 아미노산이 풍부합니다.
-      </div>
-      <div id="tab3" class="tab-content">
-        <strong>[지중해식 밸런스 팩]</strong><br>
-        통곡물과 올리브오일을 활용한 완벽한 영양 균형 식단입니다. 일상의 피로를 회복하고 활력을 더해줍니다.
-      </div>
+      <div id="tab1" class="tab-content active"><strong>[칼로리 컷팅 샐러드 팩]</strong><br>하루 1,200kcal 미만으로 구성된 식단입니다.</div>
+      <div id="tab2" class="tab-content"><strong>[고단백 육류/해산물 팩]</strong><br>단백질이 듬뿍 담긴 식단입니다.</div>
+      <div id="tab3" class="tab-content"><strong>[지중해식 밸런스 팩]</strong><br>완벽한 영양 균형 식단입니다.</div>
     </section>
 
-    <section id="features">
-      <h2>주요 기능</h2>
-      <ul class="features-grid">
-        <li><h3>1. AI 맞춤 추천</h3><p>알레르기 유무를 고려한 맞춤 메뉴 추천</p></li>
-        <li><h3>2. 사진 영양 분석</h3><p>사진 촬영으로 칼로리와 영양 성분 자동 기록</p></li>
-        <li><h3>3. 주간 리포트</h3><p>전문 영양사의 가이드라인 리포트 제공</p></li>
-      </ul>
-    </section>
-
+    <!-- 7주차 추가: 단계별 입력/확인/완료 컨테이너 분리 -->
     <section id="contact">
       <h2>7일 무료 체험 신청하기</h2>
-      <form id="applyForm">
-        <div class="form-group">
-          <label for="userName">이름</label>
-          <input type="text" id="userName" name="userName" placeholder="이름을 입력하세요" required>
-          <!-- input 이벤트 반응 영역 -->
-          <p id="nameGreeting" style="font-size: 0.85rem; font-weight: bold; margin-top: 5px; min-height: 1.2em;"></p>
-        </div>
-        
-        <div class="form-group">
-          <label for="userEmail">이메일</label>
-          <input type="email" id="userEmail" name="userEmail" placeholder="리포트를 받을 이메일을 입력하세요" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="goal">건강 목표</label>
-          <select id="goal" name="goal" required>
-            <option value="">목표를 선택해주세요</option>
-            <option value="diet">체중 감량 (다이어트)</option>
-            <option value="muscle">근육량 증가 (벌크업)</option>
-            <option value="health">건강 유지 및 식습관 개선</option>
-          </select>
-          <!-- change 이벤트 반응 영역 -->
-          <p id="goalMessage" style="font-size: 0.9rem; margin-top: 8px; display: none; padding: 8px; border-radius: 4px;"></p>
-        </div>
+      
+      <!-- [Step 1] 입력 화면 -->
+      <div id="step1-input" class="step-container active">
+        <form id="applyForm">
+          <div class="form-group">
+            <label for="userName">이름 <span class="required">*</span></label>
+            <input type="text" id="userName" placeholder="이름을 입력하세요">
+            <p id="nameGreeting" style="font-size: 0.85rem; font-weight: bold; margin-top: 5px; color: #2e7d32;"></p>
+          </div>
+          
+          <div class="form-group">
+            <label for="userEmail">이메일 <span class="required">*</span></label>
+            <input type="email" id="userEmail" placeholder="리포트를 받을 이메일을 입력하세요">
+          </div>
+          
+          <div class="form-group">
+            <label for="goal">건강 목표 <span class="required">*</span></label>
+            <select id="goal">
+              <option value="">목표를 선택해주세요</option>
+              <option value="diet">체중 감량 (다이어트)</option>
+              <option value="muscle">근육량 증가 (벌크업)</option>
+              <option value="health">건강 유지 및 식습관 개선</option>
+            </select>
+            <p id="goalMessage" style="font-size: 0.9rem; margin-top: 8px; display: none; padding: 8px; border-radius: 4px;"></p>
+          </div>
 
-        <button type="submit" id="submitBtn">무료 체험 신청하기</button>
-        <p id="feedbackMessage" style="margin-top: 10px; font-size: 0.95rem; text-align: center;"></p>
-      </form>
+          <!-- 에러 메시지 출력 영역 -->
+          <p id="errorMessage" style="color: #d32f2f; font-weight: bold; margin-top: 10px; display: none;"></p>
+          
+          <button type="button" id="btnNext" class="btn-primary" style="margin-top: 10px;">다음 단계 (입력 내용 확인)</button>
+        </form>
+      </div>
+
+      <!-- [Step 2] 확인(수정) 화면 -->
+      <div id="step2-confirm" class="step-container">
+        <h3 style="margin-bottom: 15px; color: #1b5e20;">입력하신 정보가 맞는지 확인해 주세요.</h3>
+        <ul class="confirm-list">
+          <li><strong>이름:</strong> <span id="confirmName"></span></li>
+          <li><strong>이메일:</strong> <span id="confirmEmail"></span></li>
+          <li><strong>건강 목표:</strong> <span id="confirmGoal"></span></li>
+        </ul>
+        <div class="btn-group">
+          <button type="button" id="btnEdit" class="btn-secondary">이전 (수정하기)</button>
+          <button type="button" id="btnSubmitFinal" class="btn-primary">최종 신청 완료하기</button>
+        </div>
+      </div>
+
+      <!-- [Step 3] 완료 및 재시작 화면 -->
+      <div id="step3-complete" class="step-container" style="text-align: center; padding: 20px 0;">
+        <h3 style="color: #2e7d32; font-size: 1.8rem; margin-bottom: 15px;">🎉 신청이 완료되었습니다!</h3>
+        <p style="font-size: 1.1rem; margin-bottom: 30px;">
+          <strong id="finalName"></strong>님, 작성해주신 이메일로 맞춤 식단 리포트를 보내드릴 예정입니다.
+        </p>
+        <button type="button" id="btnRestart" class="btn-secondary">처음부터 다시 신청하기 (초기화)</button>
+      </div>
+
     </section>
   </main>
 
