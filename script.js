@@ -1,4 +1,4 @@
-/* 1. 탭 UI (6주차) */
+/* 1. 탭 UI */
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabContents = document.querySelectorAll('.tab-content');
 
@@ -11,7 +11,7 @@ tabBtns.forEach(btn => {
   });
 });
 
-/* 2. 실시간 반응 (6주차) */
+/* 2. 실시간 반응 */
 const nameInput = document.getElementById('userName');
 const emailInput = document.getElementById('userEmail');
 const goalSelect = document.getElementById('goal');
@@ -40,9 +40,7 @@ goalSelect.addEventListener('change', function() {
   }
 });
 
-/* ----------------------------------------------------
-   3. 사용자 흐름 및 인터랙션 시나리오 제어 (7주차)
----------------------------------------------------- */
+/* 3. 사용자 흐름 및 중간고사 추가 기능 제어 */
 const step1 = document.getElementById('step1-input');
 const step2 = document.getElementById('step2-confirm');
 const step3 = document.getElementById('step3-complete');
@@ -53,60 +51,102 @@ const btnSubmitFinal = document.getElementById('btnSubmitFinal');
 const btnRestart = document.getElementById('btnRestart');
 const errorMessage = document.getElementById('errorMessage');
 
-// [단계 1 -> 2] 다음 단계로 (입력값 유효성 검사 및 데이터 전달)
+// 신청 내역을 저장할 배열 선언 (중간고사 기능)
+let historyData = [];
+
+// [단계 1 -> 2] 다음 단계
 btnNext.addEventListener('click', function() {
   const name = nameInput.value.trim();
   const email = emailInput.value.trim();
   const goal = goalSelect.value;
   
-  // 필수값 누락 검사 (에러 처리)
   if (!name || !email || !goal) {
     errorMessage.textContent = '❌ 이름, 이메일, 건강 목표를 모두 필수로 입력/선택해 주세요.';
     errorMessage.style.display = 'block';
     return;
   }
   
-  // 성공 시 에러 숨기기
   errorMessage.style.display = 'none';
-
-  // 확인 화면(Step 2)에 입력값 반영하기
   document.getElementById('confirmName').textContent = name;
   document.getElementById('confirmEmail').textContent = email;
   document.getElementById('confirmGoal').textContent = goalSelect.options[goalSelect.selectedIndex].text;
 
-  // 화면 전환
   step1.classList.remove('active');
   step2.classList.add('active');
 });
 
-// [단계 2 -> 1] 이전 (수정하기)
+// [단계 2 -> 1] 수정하기
 btnEdit.addEventListener('click', function() {
-  // 사용자가 입력했던 값은 인풋창에 그대로 유지된 상태로 화면만 전환됨
   step2.classList.remove('active');
   step1.classList.add('active');
 });
 
-// [단계 2 -> 3] 최종 신청 완료
+// [단계 2 -> 3] 최종 신청 및 내역 누적 (중간고사 기능)
 btnSubmitFinal.addEventListener('click', function() {
-  // 완료 화면(Step 3)에 이름 전달
-  document.getElementById('finalName').textContent = nameInput.value.trim();
+  const finalName = nameInput.value.trim();
+  document.getElementById('finalName').textContent = finalName;
   
-  // 화면 전환
+  // 새로운 신청 데이터를 객체로 생성하여 배열에 저장
+  const newData = {
+    id: Date.now(), // 취소를 위한 고유 식별자
+    name: finalName,
+    email: emailInput.value.trim(),
+    goal: goalSelect.options[goalSelect.selectedIndex].text
+  };
+  historyData.push(newData);
+  
+  // 내역 화면 갱신
+  renderHistory();
+
   step2.classList.remove('active');
   step3.classList.add('active');
 });
 
-// [단계 3 -> 1] 초기화 및 다시 시작
+// [단계 3 -> 1] 추가 신청하기 (초기화)
 btnRestart.addEventListener('click', function() {
-  // 모든 폼 입력 상태 초기화
   document.getElementById('applyForm').reset();
-  
-  // 실시간 안내 문구 초기화
   nameGreeting.textContent = '';
   goalMessage.style.display = 'none';
   errorMessage.style.display = 'none';
 
-  // 화면 전환 (첫 단계로)
   step3.classList.remove('active');
   step1.classList.add('active');
 });
+
+// [새로운 기능] 신청 내역 렌더링 함수
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  const emptyMsg = document.getElementById('emptyHistoryMessage');
+  
+  list.innerHTML = ''; // 기존 목록 초기화
+  
+  // 조건 검사: 내역이 없으면 빈 상태 메시지 노출
+  if (historyData.length === 0) {
+    emptyMsg.style.display = 'block';
+  } else {
+    emptyMsg.style.display = 'none';
+    
+    // 내역이 있으면 배열을 순회하며 목록 생성
+    historyData.forEach(item => {
+      const li = document.createElement('li');
+      li.className = 'history-item';
+      
+      const infoDiv = document.createElement('div');
+      infoDiv.className = 'history-info';
+      infoDiv.innerHTML = `<strong>${item.name}</strong> <span>[${item.goal}]</span><span style="font-size:0.85rem; color:#757575;">${item.email}</span>`;
+      
+      const cancelBtn = document.createElement('button');
+      cancelBtn.className = 'btn-cancel';
+      cancelBtn.textContent = '신청 취소';
+      cancelBtn.addEventListener('click', function() {
+        // 취소 버튼 클릭 시 해당 아이디를 제외하고 배열 재구성
+        historyData = historyData.filter(h => h.id !== item.id);
+        renderHistory(); // 화면 다시 그리기
+      });
+      
+      li.appendChild(infoDiv);
+      li.appendChild(cancelBtn);
+      list.appendChild(li);
+    });
+  }
+}
