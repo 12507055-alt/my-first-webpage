@@ -15,62 +15,56 @@
     header p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 20px; }
     nav ul { list-style: none; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
     nav a { color: #ffffff; text-decoration: none; font-weight: bold; padding: 10px 18px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; display: inline-block; white-space: nowrap; transition: background-color 0.3s; }
-    nav a:hover { background-color: rgba(255, 255, 255, 0.4); }
-
+    
     section { background-color: #ffffff; margin-bottom: 30px; padding: 30px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); }
     h2 { font-size: 1.6rem; color: #2e7d32; border-bottom: 2px solid #81c784; padding-bottom: 8px; margin-bottom: 20px; }
-    #about img { border-radius: 8px; margin-top: 15px; border: 1px solid #eeeeee; width: 100%; }
-
+    
     .features-grid { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .features-grid li { background-color: #f1f8e9; padding: 20px; border-top: 5px solid #4caf50; border-radius: 8px; }
-    .features-grid h3 { font-size: 1.15rem; color: #1b5e20; margin-bottom: 10px; }
     
     .tab-menu { display: flex; gap: 10px; margin-bottom: 20px; }
     .tab-btn { flex: 1; padding: 12px; background-color: #f1f8e9; border: 1px solid #c5e1a5; border-radius: 8px; cursor: pointer; font-weight: bold; color: #2e7d32; transition: all 0.3s; }
     .tab-btn.active { background-color: #2e7d32; color: white; border-color: #2e7d32; }
-    .tab-content { display: none; padding: 20px; background-color: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 1.05rem; }
+    .tab-content { display: none; padding: 20px; background-color: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; }
     .tab-content.active { display: block; }
 
     .step-container { display: none; }
     .step-container.active { display: block; animation: fadeIn 0.4s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    #contact form { display: flex; flex-direction: column; gap: 15px; }
-    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    /* 폼 스타일 개선 (9주차) */
+    #contact form { display: flex; flex-direction: column; gap: 18px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
     label { font-weight: bold; font-size: 0.95rem; }
     .required { color: #d32f2f; margin-left: 4px; }
-    input[type="text"], input[type="email"], select { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+    .help-text { font-size: 0.85rem; color: #616161; margin-bottom: 4px; }
+    
+    input[type="text"], input[type="email"], select, textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; transition: border-color 0.3s; }
+    textarea { resize: vertical; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: #2e7d32; box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2); }
+    input:disabled { background-color: #eeeeee; cursor: not-allowed; }
     
     button { color: #ffffff; padding: 14px; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; width: 100%; }
     .btn-primary { background-color: #2e7d32; }
-    .btn-primary:hover { background-color: #1b5e20; }
+    .btn-primary:hover:not(:disabled) { background-color: #1b5e20; }
+    .btn-primary:disabled { background-color: #9e9e9e; cursor: not-allowed; }
     .btn-secondary { background-color: #757575; }
-    .btn-secondary:hover { background-color: #424242; }
-    .btn-group { display: flex; gap: 10px; margin-top: 15px; }
     
+    .btn-group { display: flex; gap: 10px; margin-top: 15px; }
     .confirm-list { list-style: none; background-color: #f1f8e9; padding: 25px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #c5e1a5; }
     .confirm-list li { margin-bottom: 12px; font-size: 1.1rem; }
 
-    /* 중간고사 추가 기능: 신청 내역 목록 스타일 */
     .history-section { margin-top: 40px; text-align: left; padding-top: 20px; border-top: 2px dashed #e0e0e0; }
-    .history-section h4 { color: #1b5e20; margin-bottom: 15px; font-size: 1.3rem; }
-    .history-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .history-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #ffffff; border: 1px solid #c5e1a5; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-    .history-info { display: flex; flex-direction: column; gap: 4px; }
+    .history-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top:15px; }
+    .history-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #ffffff; border: 1px solid #c5e1a5; border-radius: 8px; }
     .btn-cancel { background-color: #d32f2f; width: auto; padding: 8px 16px; font-size: 0.95rem; }
-    .btn-cancel:hover { background-color: #b71c1c; }
-    .empty-msg { color: #757575; font-style: italic; text-align: center; padding: 20px 0; background: #eeeeee; border-radius: 8px; }
-
+    
     footer { text-align: center; color: #777777; font-size: 0.9rem; margin-top: 40px; }
 
     @media screen and (max-width: 768px) {
-      header { padding: 25px 15px; }
-      nav ul { flex-direction: column !important; gap: 10px !important; }
-      nav a { display: block !important; text-align: center; width: 100%; }
+      nav ul { flex-direction: column !important; }
       .features-grid { grid-template-columns: 1fr !important; }
       .tab-menu, .btn-group { flex-direction: column; }
-      
-      /* 모바일 신청 내역 스타일 조정 */
       .history-item { flex-direction: column; align-items: flex-start; gap: 12px; }
       .btn-cancel { width: 100%; }
     }
@@ -80,61 +74,67 @@
   <header>
     <h1>NutriAI (뉴트리아)</h1>
     <p>AI가 분석하는 나만을 위한 맞춤형 식단 및 영양 케어 솔루션</p>
-    <nav>
-      <ul>
-        <li><a href="#about">서비스 소개</a></li>
-        <li><a href="#tabs">추천 식단</a></li>
-        <li><a href="#contact">무료 체험 신청</a></li>
-      </ul>
-    </nav>
+    <nav><ul><li><a href="#about">서비스 소개</a></li><li><a href="#contact">무료 체험 신청</a></li></ul></nav>
   </header>
 
   <main>
-    <section id="about">
-      <h2>서비스 소개</h2>
-      <p>NutriAI는 사용자의 건강 데이터와 취향을 분석하여 최적의 영양 밸런스 식단을 제안합니다.</p>
-      <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600" alt="건강 식단 예시 이미지">
-    </section>
-
-    <section id="tabs">
-      <h2>맞춤형 추천 식단 미리보기</h2>
-      <div class="tab-menu">
-        <button class="tab-btn active" data-target="tab1">🥗 다이어트 식단</button>
-        <button class="tab-btn" data-target="tab2">🥩 벌크업 식단</button>
-        <button class="tab-btn" data-target="tab3">🥑 건강 유지 식단</button>
-      </div>
-      <div id="tab1" class="tab-content active"><strong>[칼로리 컷팅 샐러드 팩]</strong><br>하루 1,200kcal 미만으로 구성된 식단입니다.</div>
-      <div id="tab2" class="tab-content"><strong>[고단백 육류/해산물 팩]</strong><br>단백질이 듬뿍 담긴 식단입니다.</div>
-      <div id="tab3" class="tab-content"><strong>[지중해식 밸런스 팩]</strong><br>완벽한 영양 균형 식단입니다.</div>
-    </section>
-
     <section id="contact">
       <h2>7일 무료 체험 신청하기</h2>
       
-      <!-- [Step 1] 입력 화면 -->
+      <!-- [Step 1] 입력 화면 (9주차 폼 개선) -->
       <div id="step1-input" class="step-container active">
         <form id="applyForm">
+          
           <div class="form-group">
             <label for="userName">이름 <span class="required">*</span></label>
             <input type="text" id="userName" placeholder="이름을 입력하세요">
-            <p id="nameGreeting" style="font-size: 0.85rem; font-weight: bold; margin-top: 5px; color: #2e7d32;"></p>
           </div>
+          
           <div class="form-group">
             <label for="userEmail">이메일 <span class="required">*</span></label>
             <input type="email" id="userEmail" placeholder="리포트를 받을 이메일을 입력하세요">
           </div>
+          
           <div class="form-group">
             <label for="goal">건강 목표 <span class="required">*</span></label>
             <select id="goal">
               <option value="">목표를 선택해주세요</option>
               <option value="diet">체중 감량 (다이어트)</option>
               <option value="muscle">근육량 증가 (벌크업)</option>
-              <option value="health">건강 유지 및 식습관 개선</option>
             </select>
-            <p id="goalMessage" style="font-size: 0.9rem; margin-top: 8px; display: none; padding: 8px; border-radius: 4px;"></p>
           </div>
-          <p id="errorMessage" style="color: #d32f2f; font-weight: bold; margin-top: 10px; display: none;"></p>
-          <button type="button" id="btnNext" class="btn-primary" style="margin-top: 10px;">다음 단계 (입력 내용 확인)</button>
+
+          <!-- 9주차 요구사항 2: 조건부 입력 구현 -->
+          <div class="form-group">
+            <label>식이 알레르기 여부</label>
+            <p class="help-text">특정 식재료에 알레르기가 있다면 반드시 체크해주세요.</p>
+            <div style="display: flex; gap: 8px; align-items: center; margin-top: 5px;">
+              <input type="checkbox" id="hasAllergy" style="width: 20px; height: 20px; cursor: pointer;">
+              <label for="hasAllergy" style="font-weight: normal; cursor: pointer;">알레르기가 있습니다.</label>
+            </div>
+            <!-- 숨겨진 추가 입력 영역 -->
+            <div id="allergyInputBox" style="display: none; margin-top: 10px;">
+              <label for="allergyDetails" style="font-size: 0.9rem;">알레르기 상세 정보 <span class="required">*</span></label>
+              <input type="text" id="allergyDetails" disabled placeholder="예: 땅콩, 새우, 우유 등 유발 식품 입력">
+            </div>
+          </div>
+
+          <!-- 9주차 요구사항 3: 입력 검증과 피드백 (글자 수 실시간 체크) -->
+          <div class="form-group">
+            <label for="requestDetails">추가 요청사항 <span class="required">*</span></label>
+            <p class="help-text">개인 맞춤형 식단 구성을 위해 10자 이상 100자 이내로 상세히 적어주세요.</p>
+            <textarea id="requestDetails" rows="3" placeholder="예: 평소 소화가 잘 안 돼서 부드러운 식단을 원해요." maxlength="100"></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 4px;">
+              <span id="requestFeedback" style="font-size: 0.85rem; font-weight: bold;"></span>
+              <span id="charCount" style="font-size: 0.85rem; color: #757575;">0/100</span>
+            </div>
+          </div>
+
+          <!-- 전역 에러 메시지 -->
+          <p id="errorMessage" style="color: #d32f2f; font-weight: bold; text-align: center; margin-top: 10px; display: none;"></p>
+          
+          <!-- type="submit"으로 변경 -->
+          <button type="submit" id="btnNext" class="btn-primary" style="margin-top: 15px;">입력 완료 및 데이터 제출하기</button>
         </form>
       </div>
 
@@ -145,25 +145,23 @@
           <li><strong>이름:</strong> <span id="confirmName"></span></li>
           <li><strong>이메일:</strong> <span id="confirmEmail"></span></li>
           <li><strong>건강 목표:</strong> <span id="confirmGoal"></span></li>
+          <li><strong>요청사항:</strong> <span id="confirmRequest"></span></li>
         </ul>
         <div class="btn-group">
           <button type="button" id="btnEdit" class="btn-secondary">이전 (수정하기)</button>
-          <button type="button" id="btnSubmitFinal" class="btn-primary">최종 신청 완료하기</button>
+          <button type="button" id="btnSubmitFinal" class="btn-primary">최종 신청 확정하기</button>
         </div>
       </div>
 
-      <!-- [Step 3] 완료 및 신청 내역 관리 화면 (중간고사 반영 부분) -->
+      <!-- [Step 3] 완료 및 내역 화면 -->
       <div id="step3-complete" class="step-container" style="text-align: center;">
         <h3 style="color: #2e7d32; font-size: 1.8rem; margin-bottom: 15px;">🎉 신청이 완료되었습니다!</h3>
-        <p style="font-size: 1.1rem; margin-bottom: 20px;">
-          <strong id="finalName"></strong>님, 작성해주신 이메일로 리포트를 보내드릴 예정입니다.
-        </p>
-        <button type="button" id="btnRestart" class="btn-primary">추가 신청하기 (초기화)</button>
+        <p style="font-size: 1.1rem; margin-bottom: 20px;"><strong id="finalName"></strong>님, 맞춤 식단 리포트를 보내드릴 예정입니다.</p>
+        <button type="button" id="btnRestart" class="btn-primary">추가 신청하기 (폼 초기화)</button>
 
-        <!-- 신청 내역 리스트 영역 -->
         <div class="history-section">
-          <h4>📌 나의 전체 신청 내역</h4>
-          <p id="emptyHistoryMessage" class="empty-msg">현재 누적된 신청 내역이 없습니다.</p>
+          <h4 style="color: #1b5e20; font-size: 1.2rem;">📌 나의 신청 내역</h4>
+          <p id="emptyHistoryMessage" style="color: #757575; font-style: italic; margin-top: 15px;">현재 누적된 신청 내역이 없습니다.</p>
           <ul id="historyList" class="history-list"></ul>
         </div>
       </div>
